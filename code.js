@@ -7,16 +7,9 @@ let svgNS = "http://www.w3.org/2000/svg";
 $(document).ready(function() {
     $.ajax({
         type: "GET",
-        url: "DentalJobsShort.csv",
+        url: "DentalJobsFiltered.csv",
         dataType: "text",
         success: function(data) {processData(data, DJ);}
-    });
-
-    $.ajax({
-        type: "GET",
-        url: "MedicalJobsFiltered.csv",
-        dataType: "text",
-        success: function(data) {processData(data, MJ)}
     });
 
     $.ajax({
