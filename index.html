@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="src/Animate.js"></script>
+	<script src="src/Scroller.js"></script>
+	<script src="src/render.js"></script>
+</head>
+<style>
+    svg {
+        z-index: 100;
+        position: relative;
+        width: 2782px;
+        height: 1820px;
+        top: -1727px;
+        left: 56px;
+    }
+
+    img {
+        opacity:.75;
+    }
+
+    .circle:hover {
+        fill: blue;
+        r: 2.25;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    #details {
+        z-index: 110;
+        position: fixed;
+        width: 375px;
+        height: 200px;
+        top: 50px;
+        left: 940px;
+        background-color: rgba(255,255,255,.7);
+        border-radius: 15px;
+        padding: 15px;
+    }
+
+	#content{
+		background: white;
+		width: 278px;
+		height: 1820px;
+        transform: translate3d(-196.987px, -686.396px, 0px) scale(1.79476);
+        -webkit-transform-origin: left top;
+        -webkit-transform: translateZ(0);
+        -moz-transform-origin: left top;
+        -moz-transform: translateZ(0);
+        -ms-transform-origin: left top;
+        -ms-transform: translateZ(0);
+        -o-transform-origin: left top;
+        -o-transform: translateZ(0);
+        transform-origin: top left;
+        transform: translateZ(0);
+	}
+    #container {
+        width: 900px;
+        height: 540px;
+        position: absolute;
+		left: 20px;
+		top: 40px;
+		bottom: 20px;
+		right: 20px;
+		border: 5px solid black;
+		overflow: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    iframe {
+        position: absolute;
+        top: 650px;
+        left:100px;
+    }
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+</style>
+
+<body>
+    <h1>Dental Job Data by Zipcode</h1>
+    <div id="container">
+        <div id="content">
+            <img src="map.png" height="1820" width="2882" />
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 600">
+
+            </svg>
+
+            
+        </div>
+    </div>
+    <div id="details"> 
+        <h2 id="zip">Zipcode:<span></span></h2>
+        <h2 id="city">City:<span></span></h2>
+        <h2 id="state">State:<span></span></h2>
+        <h2 id="pop">Population:<span></span></h2>
+        <h2 id="jobs">Jobs Available(25mi. radius):<span></span></h2>
+    </div>
+    <iframe src="DentalJobsFiltered.html" width="650" height="400"></iframe>
+    <script src="code.js"></script>
+    <script type="text/javascript">
+
+		// Settings
+		var contentWidth = 2782;
+		var contentHeight = 2000;
+		var cellWidth = 100;
+		var cellHeight = 100;
+
+		// Initialize layout
+		var container = document.getElementById("container");
+		var content = document.getElementById("content");
+	
+		content.style.width = contentWidth + "px";
+		content.style.height = contentHeight + "px";
+
+
+		// Generate content
+		var size = 100;
+		var frag = document.createDocumentFragment();
+		for (var row=0, rl=contentHeight/size; row<rl; row++) {
+			for (var col=0, cl=contentWidth/size; col<cl; col++) {
+				elem = document.createElement("div");
+				elem.style.backgroundColor = row%2 + col%2 > 0 ? "#ddd" : "";
+				elem.style.width = cellWidth + "px";
+				elem.style.height = cellHeight + "px";
+				elem.style.display = "inline-block";
+				elem.style.textIndent = "6px";
+				elem.innerHTML = row + "," + col;
+				frag.appendChild(elem);
+			}
+		}
+		content.appendChild(frag);
+	</script>
+    <script src="src/ui.js"></script>
+</body>
+
+</html>
